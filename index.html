@@ -2,38 +2,50 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<title>Latitude</title>
-	<link rel="stylesheet" href="style.css">
-	<link rel="stylesheet" href="reset.css">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <title>Latitude</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <title>Belly Button Biodiversity</title>
 </head>
 <body>
   <div class="container">
+    <div class="jumbotron text-center" id="home">
+      <h1 class="display-4">Belly Button Biodiversity Dashboard</h1>
+      <hr class="my-4">
+      <p class="lead">Use the interactive charts below to explore the dataset.</p>
+      <a href="http://robdunnlab.com/projects/belly-button-biodiversity/">Learn more</a>
+    </div>
+  </div>
+  <div class="container">
     <div class="row">
-      <div class="col-md-6">
-        <h1>Summary: Latitude vs. X</h1>
+      <div class="col-md-3">
+        <div class="row justify-content-center">
+          <h5 class="text-center">Select Sample</h5>
+          <img src="Images/dropdown.png" alt="dropdown" id="dropdown-image">
+        </div>
+        <div class="row justify-content-center">
+          <h5 class="text-center">Sample MetaData</h5>
+          <img src="Images/hw01.png" alt="hw01" id="metadata-image">
+        </div>
       </div>
-      <div class="col-md-6">
-        <h2>Visualizations</h2>
+      <div class="col-md-5">
+        <h5 class="text-center">Distribution</h5>
+        <img src="Images/pie_chart.png" alt="pie_chart" id="pie_chart-image">
+      </div>
+      <div class="col-md-4">
+        <h5 class="text-center">Belly Button Washing Frequency</h5>
+        <p class="text-center">Scrubs Per Week</p>
+        <img src="Images/gauge.png" alt="gauge" id="gauge-image">
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-6">
-        <img id="summary-image" src="Resources/assets/images/Fig1.png" alt="Max Temperature">
-        <p>The purpose of this project was to analyze how weather changes as you get closer to the equator. To accomplish this analysis, we first pulled data from the OpenWeatherMap API to assemble a dataset on over 500 cities.</p>
-	<br>
-        <p>After assembling the dataset, we used Matplotlib to plot various aspects of the weather vs. latitude. Factors we looked at included temperature, cloudiness, wind speed, and humidity. This site provides the source data and visualizations created as part of the analysis, as well as explanations and descriptions of any trends and correlations witnessed.</p>
-      </div>
-      <div class="col-md-6">
-        <div class="row">
-             <img id="grid-image" src="Resources/assets/images/Fig1.png" alt="Max Temperature">
-             <img id="grid-image" src="Resources/assets/images/Fig2.png" alt="Humidity">
-             <img id="grid-image" src="Resources/assets/images/Fig3.png" alt="Cloudiness">
-             <img id="grid-image" src="Resources/assets/images/Fig4.png" alt="Wind Speed">
-        </div>
+    <div class="row justify-content-center">
+      <div class="col-md-12">
+        <h5 class="text-center">Occurrence</h5>
+        <img id="bubble_chart-image" src="Images/bubble_chart.png">
       </div>
     </div>
   </div>

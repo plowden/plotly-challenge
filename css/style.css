@@ -24,7 +24,8 @@ h1 {
   margin-bottom: 20px;
   font-size: 36px;
   color: green;
-  text-align: left;
+  text-align: center;
+  background-image: url('Images/bacteria.jpg');
 }
 
 h2 {
@@ -33,7 +34,15 @@ h2 {
   margin-bottom: 20px;
   font-size: 30px;
   color: green;
-  text-align: left;
+  text-align: center;
+}
+
+h5 {
+  margin-left: 80px;
+  margin-bottom: 20px;
+  font-size: 30px;
+  color: green;
+  text-align: center;
 }
 
 a {
@@ -61,6 +70,10 @@ p {
 }
 
 /* Selecting elements by ID */
+#home {
+  background-image: url('Images/bacteria.jpg');
+}
+
 #main-summary,
 #summary-image {
   float: left;
@@ -74,50 +87,46 @@ p {
   width: 70%;
 }
 
-#summary-image {
+#metadata-image {
   width: 300px;
-  height: 250px;
+  height: 300px;
   margin-right: 20px;
   margin-bottom: 20px;
+  float: left;
 }
 
-#comparison-image {
-  width: 500px;
-  height: 400px;
-  margin-right: 20px;
-  margin-bottom: 20px;
-}
-
-#grid-image {
-  width: 175px;
+#dropdown-image {
+  width: 200px;
   height: 150px;
   margin-right: 20px;
   margin-bottom: 20px;
+  float: left;
 }
 
-#comparison-image {
-  width: 475px;
+#pie_chart-image {
+  width: 500px;
   height: 400px;
+  margin-left: 20px;
   margin-right: 20px;
   margin-bottom: 20px;
+  float: left;
 }
 
-/* Adding media queries to show the drop-down, and hide the navbar when the screen is smaller than 480 pixels */
-@media (max-width: 480px) {
-  .navbar li {
-    padding: 10px;
-  }
-
-  .post {
-    margin-right: 30px;
-    margin-left: 30px;
-  }
-
-  .navbar ul {
-    visibility: hidden;
-  }
-
-  #nav-select {
-    visibility: visible;
-  }
+#gauge-image {
+  width: 400px;
+  height: 300px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  float: left;
 }
+
+#bubble_chart-image {
+  width: 1200px;
+  height: 400px;
+  margin-bottom: 20px;
+  float: left;
+}
+
+
+
