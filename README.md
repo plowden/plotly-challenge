@@ -1,3 +1,3 @@
 # plotly-challenge
 
-https://plowden.plotly-challenge.github.io/
+https://plowden.github.io/plotly-challenge/
