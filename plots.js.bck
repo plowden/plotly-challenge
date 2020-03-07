@@ -20,31 +20,18 @@ function printMetadata(meta) {
   console.log("meta.id: ", meta.id);
   //var metadata = d3.select("#metadata-age").append("p");
   //metadata.text(metadata.age);
+  var selectedSample = d3.select("#select-id");
+  selectedSample.selectAll('p').remove()
   //var metadata = d3.select("#metadata-age").append("p").text(meta.age);
   var metadata = d3.select("#metadata-age");
-  metadata.selectAll('p').remove()
-  metadata.append("p").text("AGE: " + meta.age);
-  metadata = d3.select("#metadata-bbtype")
-  metadata.selectAll('p').remove()
-  metadata.append("p").text(meta.bbtype);
-  metadata = d3.select("#metadata-ethnicity")
-  metadata.selectAll('p').remove()
-  metadata.append("p").text(meta.ethnicity);
-  metadata = d3.select("#metadata-gender")
-  metadata.selectAll('p').remove()
-  metadata.append("p").text(meta.gender);
-  metadata = d3.select("#metadata-location")
-  metadata.selectAll('p').remove()
-  metadata.append("p").text(meta.location);
-  metadata = d3.select("#metadata-wfreq")
-  metadata.selectAll('p').remove()
-  metadata.append("p").text(meta.wfreq);
-  metadata = d3.select("#metadata-id")
-  metadata.selectAll('p').remove()
-  metadata.append("p").text(meta.id);
-}
-
-function pie(meta) {
+  //metadata.selectAll('p').remove()
+  metadata.append("p").text(meta.age);
+  metadata = d3.select("#metadata-bbtype").append("p").text(meta.bbtype);
+  metadata = d3.select("#metadata-ethnicity").append("p").text(meta.ethnicity);
+  metadata = d3.select("#metadata-gender").append("p").text(meta.gender);
+  metadata = d3.select("#metadata-location").append("p").text(meta.location);
+  metadata = d3.select("#metadata-wfreq").append("p").text(meta.wfreq);
+  metadata = d3.select("#metadata-id").append("p").text(meta.id);
 }
 
 // Fetch the JSON data and console log it
@@ -74,6 +61,7 @@ d3.json(url).then(function(data) {
         printMetadata(entry);
       }
     });
-    //pie(id);
+    //printMetadata(id);
+    //filter(option, value);
   });
 });

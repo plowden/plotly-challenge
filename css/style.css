@@ -25,7 +25,7 @@ h1 {
   font-size: 36px;
   color: green;
   text-align: center;
-  background-image: url('Images/bacteria.jpg');
+  /* background-image: url('../Images/bacteria.jpg'); */
 }
 
 h2 {
@@ -71,7 +71,7 @@ p {
 
 /* Selecting elements by ID */
 #home {
-  background-image: url('Images/bacteria.jpg');
+/*  background-image: url('Images/bacteria.jpg'); */
 }
 
 #main-summary,
@@ -104,8 +104,8 @@ p {
 }
 
 #pie_chart-image {
-  width: 500px;
-  height: 400px;
+  width: 450px;
+  height: 360px;
   margin-left: 20px;
   margin-right: 20px;
   margin-bottom: 20px;
@@ -115,7 +115,7 @@ p {
 #gauge-image {
   width: 400px;
   height: 300px;
-  margin-left: 20px;
+  margin-left: 0px;
   margin-right: 20px;
   margin-bottom: 20px;
   float: left;
@@ -127,6 +127,4 @@ p {
   margin-bottom: 20px;
   float: left;
 }
-
-
 

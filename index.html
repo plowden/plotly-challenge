@@ -3,13 +3,14 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Latitude</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Belly Button Biodiversity</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  <title>Belly Button Biodiversity</title>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
   <div class="container">
@@ -25,11 +26,39 @@
       <div class="col-md-3">
         <div class="row justify-content-center">
           <h5 class="text-center">Select Sample</h5>
-          <img src="Images/dropdown.png" alt="dropdown" id="dropdown-image">
+          <!-- <img src="Images/dropdown.png" alt="dropdown" id="dropdown-image"> -->
+        </div>
+        <div class="row justify-content-center">
+          <div id="select"></div>
+          <select id="select-id">
+            <!--<option value="999">999</option>-->
+            <!--<option value="111">111</option>-->
+          </select>
         </div>
         <div class="row justify-content-center">
           <h5 class="text-center">Sample MetaData</h5>
-          <img src="Images/hw01.png" alt="hw01" id="metadata-image">
+          <!--<img src="Images/hw01.png" alt="hw03" id="metadata-image">-->
+        </div>
+        <div class="row justify-content-center" id="metadata-age">
+          AGE:&nbsp;
+        </div>
+        <div class="row justify-content-center" id="metadata-bbtype">
+          BBTYPE:&nbsp;
+        </div>
+        <div class="row justify-content-center" id="metadata-ethnicity">
+          ETHNICITY:&nbsp;
+        </div>
+        <div class="row justify-content-center" id="metadata-gender">
+          GENDER:&nbsp;
+        </div>
+        <div class="row justify-content-center" id="metadata-location">
+          LOCATION:&nbsp;
+        </div>
+        <div class="row justify-content-center" id="metadata-wfreq">
+          WFREQ:&nbsp;
+        </div>
+        <div class="row justify-content-center" id="metadata-id">
+          SAMPLE:&nbsp;
         </div>
       </div>
       <div class="col-md-5">
@@ -49,7 +78,6 @@
       </div>
     </div>
   </div>
-
+  <script src="plots.js"></script>
 </body>
-
 </html>
