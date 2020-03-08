@@ -6,8 +6,8 @@
 
 // Get the JSON data
 
-const url = "http://localhost:8000/plotly-challenge/data/samples.json";
-//const url = "https://plowden.github.io/plotly-challenge/data/samples.json";
+//const url = "http://localhost:8000/plotly-challenge/data/samples.json";
+const url = "https://plowden.github.io/plotly-challenge/data/samples.json";
 
 
 function printMetadata(meta) {
