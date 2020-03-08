@@ -6,45 +6,89 @@
 
 // Get the JSON data
 
-//const url = "http://localhost:8000/plotly-challenge/data/samples.json";
-const url = "https://plowden.github.io/plotly-challenge/data/samples.json";
+const url = "http://localhost:8000/plotly-challenge/data/samples.json";
+//const url = "https://plowden.github.io/plotly-challenge/data/samples.json";
 
 
 function printMetadata(meta) {
-  console.log("meta.age: ", meta.age);
-  console.log("meta.bbtype: ", meta.bbtype);
-  console.log("meta.ethnicity: ", meta.ethnicity);
-  console.log("meta.gender: ", meta.gender);
-  console.log("meta.location: ", meta.location);
-  console.log("meta.wfreq: ", meta.wfreq);
-  console.log("meta.id: ", meta.id);
-  //var metadata = d3.select("#metadata-age").append("p");
-  //metadata.text(metadata.age);
-  //var metadata = d3.select("#metadata-age").append("p").text(meta.age);
+  //DEBUG console.log("meta.age: ", meta.age);
+  //DEBUG console.log("meta.bbtype: ", meta.bbtype);
+  //DEBUG console.log("meta.ethnicity: ", meta.ethnicity);
+  //DEBUG console.log("meta.gender: ", meta.gender);
+  //DEBUG console.log("meta.location: ", meta.location);
+  //DEBUG console.log("meta.wfreq: ", meta.wfreq);
+  //DEBUG console.log("meta.id: ", meta.id);
   var metadata = d3.select("#metadata-age");
-  metadata.selectAll('p').remove()
-  metadata.append("p").text("AGE: " + meta.age);
+  metadata.selectAll('span').remove()
+  metadata.append("span").text("AGE: " + meta.age);
   metadata = d3.select("#metadata-bbtype")
-  metadata.selectAll('p').remove()
-  metadata.append("p").text(meta.bbtype);
+  metadata.selectAll('span').remove()
+  metadata.append("span").text("BBTYPE: " + meta.bbtype);
   metadata = d3.select("#metadata-ethnicity")
-  metadata.selectAll('p').remove()
-  metadata.append("p").text(meta.ethnicity);
+  metadata.selectAll('span').remove()
+  metadata.append("span").text("ETHNICITY: " + meta.ethnicity);
   metadata = d3.select("#metadata-gender")
-  metadata.selectAll('p').remove()
-  metadata.append("p").text(meta.gender);
+  metadata.selectAll('span').remove()
+  metadata.append("span").text("GENDER: " + meta.gender);
   metadata = d3.select("#metadata-location")
-  metadata.selectAll('p').remove()
-  metadata.append("p").text(meta.location);
+  metadata.selectAll('span').remove()
+  metadata.append("span").text("LOCATION: " + meta.location);
   metadata = d3.select("#metadata-wfreq")
-  metadata.selectAll('p').remove()
-  metadata.append("p").text(meta.wfreq);
+  metadata.selectAll('span').remove()
+  metadata.append("span").text("WFREQ: " + meta.wfreq);
   metadata = d3.select("#metadata-id")
-  metadata.selectAll('p').remove()
-  metadata.append("p").text(meta.id);
+  metadata.selectAll('span').remove()
+  metadata.append("span").text("SAMPLE: " + meta.id);
 }
 
-function pie(meta) {
+function barChart(sample) {
+  //DEBUG console.log("sample.id: ", sample.id);
+  otu_ids = sample.otu_ids.slice(0, 10);
+  //DEBUG console.log("otu_ids: ", otu_ids);
+  sample_values = sample.sample_values.slice(0, 10);
+  //DEBUG console.log("sample_values: ", sample_values);
+  otu_labels = sample.otu_labels.slice(0, 10);
+  //DEBUG console.log("otu_labels: ", otu_labels);
+  var trace1 = {
+    x: sample_values.reverse(),
+    text: otu_labels,
+    type: "bar",
+    orientation: "h"
+  };
+  var data = [trace1];
+  var layout = {
+    autosize: false,
+    width: 300,
+    height: 300,
+    yaxis: {
+      tickmode: "array",
+      tickvals: [0,1,2,3,4,5,6,7,8,9],
+      ticktext: otu_ids,
+      showticklabels: true
+    },
+    margin: {
+      l: 80,
+      r: 20,
+      t: 10,
+      b: 20
+    }
+  };
+  Plotly.newPlot("bar_chart", data, layout);
+}
+
+function gauge(meta) {
+  //DEBUG console.log("gauge meta.wfreq: ", meta.wfreq);
+  var data = [{
+    domain: { x: [0, 1], y: [0, 1] },
+    value: meta.wfreq,
+    title: { text: "Scrubs Per Week" },
+    type: "indicator",
+    mode: "gauge+number",
+    delta: { reference: 0 },
+    gauge: { axis: { range: [null, 10] } }
+  }];
+  var layout = { width: 400, height: 400, margin: { t: 0, b: 80 } };
+  Plotly.newPlot("gauge", data, layout);
 }
 
 // Fetch the JSON data and console log it
@@ -66,14 +110,21 @@ d3.json(url).then(function(data) {
   // Set up the listener.
   selectID.on("change", function() {
     id = d3.event.target.value;
-    console.log("id: ", id);
+    //DEBUG console.log("id: ", id);
     data.metadata.forEach(function (entry) {
       //console.log(entry.id);
       if (entry.id == id) {
-        console.log("Found it! ", id);
+        //DEBUG console.log("Found it! ", id);
         printMetadata(entry);
+        gauge(entry);
       }
     });
-    //pie(id);
+    data.samples.forEach(function (entry) {
+      //console.log(entry.id);
+      if (entry.id == id) {
+        //DEBUG console.log("Found sample: ", id);
+        barChart(entry);
+      }
+    });
   });
 });
