@@ -6,18 +6,11 @@
 
 // Get the JSON data
 
-//const url = "http://localhost:8000/plotly-challenge/data/samples.json";
-const url = "https://plowden.github.io/plotly-challenge/data/samples.json";
+const url = "http://localhost:8000/plotly-challenge/data/samples.json";
+//const url = "https://plowden.github.io/plotly-challenge/data/samples.json";
 
 
 function printMetadata(meta) {
-  //DEBUG console.log("meta.age: ", meta.age);
-  //DEBUG console.log("meta.bbtype: ", meta.bbtype);
-  //DEBUG console.log("meta.ethnicity: ", meta.ethnicity);
-  //DEBUG console.log("meta.gender: ", meta.gender);
-  //DEBUG console.log("meta.location: ", meta.location);
-  //DEBUG console.log("meta.wfreq: ", meta.wfreq);
-  //DEBUG console.log("meta.id: ", meta.id);
   var metadata = d3.select("#metadata-age");
   metadata.selectAll('span').remove()
   metadata.append("span").text("AGE: " + meta.age);
@@ -42,13 +35,9 @@ function printMetadata(meta) {
 }
 
 function barChart(sample) {
-  //DEBUG console.log("sample.id: ", sample.id);
   otu_ids = sample.otu_ids.slice(0, 10);
-  //DEBUG console.log("otu_ids: ", otu_ids);
   sample_values = sample.sample_values.slice(0, 10);
-  //DEBUG console.log("sample_values: ", sample_values);
   otu_labels = sample.otu_labels.slice(0, 10);
-  //DEBUG console.log("otu_labels: ", otu_labels);
   var trace1 = {
     x: sample_values.reverse(),
     text: otu_labels,
@@ -77,7 +66,6 @@ function barChart(sample) {
 }
 
 function gauge(meta) {
-  //DEBUG console.log("gauge meta.wfreq: ", meta.wfreq);
   var data = [{
     domain: { x: [0, 1], y: [0, 1] },
     value: meta.wfreq,
@@ -91,6 +79,52 @@ function gauge(meta) {
   Plotly.newPlot("gauge", data, layout);
 }
 
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+function bubble(sample) {
+  otu_ids = sample.otu_ids.slice(0, 10);
+  sample_values = sample.sample_values.slice(0, 10);
+  otu_labels = sample.otu_labels.slice(0, 10);
+
+  colors = [];
+
+  for (var i = 0; i < sample.otu_ids.length; i++) {
+    colors.push(getRandomColor());
+  }
+ console.log("colors: ", colors);
+
+  var trace1 = {
+    x: sample.otu_ids,
+    y: sample.sample_values,
+    text: sample.otu_labels,
+    mode: 'markers',
+    xaxis: (
+      title='OTU ID'
+    ),
+    marker: {
+      color: colors,
+      size: sample.sample_values
+    }
+  };
+
+  var data = [trace1];
+
+  var layout = {
+    showlegend: false,
+    height: 600,
+    width: 1200
+  };
+
+  Plotly.newPlot("bubble", data, layout);
+}
+
 // Fetch the JSON data and console log it
 d3.json(url).then(function(data) {
  
@@ -102,19 +136,15 @@ d3.json(url).then(function(data) {
   options = [""];
   // Set option list to json names array.
   options = options.concat(data.names);
-  //DEBUG console.log("names: ", data.names);
-  //DEBUG console.log("options: ", options);
   // Create option tags.
   var selectID = d3.select("#select-id");
   selectID.selectAll("option").data(options).enter().append("option").text(function(d) {return d});
   // Set up the listener.
   selectID.on("change", function() {
     id = d3.event.target.value;
-    //DEBUG console.log("id: ", id);
     data.metadata.forEach(function (entry) {
       //console.log(entry.id);
       if (entry.id == id) {
-        //DEBUG console.log("Found it! ", id);
         printMetadata(entry);
         gauge(entry);
       }
@@ -122,8 +152,8 @@ d3.json(url).then(function(data) {
     data.samples.forEach(function (entry) {
       //console.log(entry.id);
       if (entry.id == id) {
-        //DEBUG console.log("Found sample: ", id);
         barChart(entry);
+        bubble(entry);
       }
     });
   });
