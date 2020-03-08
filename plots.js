@@ -161,16 +161,16 @@ function bubble(sample) {
   }
 
   var trace1 = {
-    x: sample.otu_ids.reverse(),
-    y: sample.sample_values.reverse(),
-    text: sample.otu_labels.reverse(),
+    x: sample.otu_ids,
+    y: sample.sample_values,
+    text: sample.otu_labels,
     mode: 'markers',
     xaxis: (
       title='OTU ID'
     ),
     marker: {
       color: colors,
-      size: sample.sample_values.reverse()
+      size: sample.sample_values
     }
   };
 
