@@ -1,15 +1,7 @@
-/**
- * names[]
- * metadata{id==names,ethnicity,gender,age,location,bbtye,wfreq}
- * samples{id==names,otu_ids,sample_values,otu_labels
- */
-
-// Get the JSON data
-
-//const url = "http://localhost:8000/plotly-challenge/data/samples.json";
+// Define the URL for the page.
 const url = "https://plowden.github.io/plotly-challenge/data/samples.json";
 
-
+// This function clears then prints the metadata.
 function printMetadata(meta) {
   var metadata = d3.select("#metadata-age");
   metadata.selectAll('span').remove()
@@ -34,6 +26,8 @@ function printMetadata(meta) {
   metadata.append("span").text("SAMPLE: " + meta.id);
 }
 
+// This function creates the horizontal bar chart showing
+// the top 10 OTU IDs.
 function barChart(sample) {
   otu_ids = sample.otu_ids.slice(0, 10);
   sample_values = sample.sample_values.slice(0, 10);
@@ -65,20 +59,86 @@ function barChart(sample) {
   Plotly.newPlot("bar_chart", data, layout);
 }
 
+// This function creates the gauge. It's actually a
+// pie chart with the bottom half colored white to match
+// the background.
 function gauge(meta) {
-  var data = [{
-    domain: { x: [0, 1], y: [0, 1] },
-    value: meta.wfreq,
-    title: { text: "Scrubs Per Week" },
-    type: "indicator",
-    mode: "gauge+number",
-    delta: { reference: 0 },
-    gauge: { axis: { range: [null, 10] } }
+
+  var level = meta.wfreq;
+
+  // Trig to calc meter point
+  var degrees = 180 - level * 20, radius = .5;
+  var radians = degrees * Math.PI / 180;
+  var x = radius * Math.cos(radians);
+  var y = radius * Math.sin(radians);
+
+  // Path
+  var mainPath = 'M -.0 -0.035 L .0 0.035 L ',
+    pathX = String(x),
+    space = ' ',
+    pathY = String(y),
+    pathEnd = ' Z';
+  var path = mainPath.concat(pathX,space,pathY,pathEnd);
+
+  var data = [{ 
+    type: 'category',
+    x: [0],
+    y: [0],
+    marker: {
+      size: 28,
+      color:'850000'
+    },
+    showlegend: false,
+    name: 'gauge',
+    text: level,
+    hoverinfo: 'text+name'
+  },
+  { 
+    // Here's the magic: have a dummy last value that is the sum of the other values.
+    values: [1, 1, 1, 1, 1, 1, 1, 1, 1, 9],
+    rotation: 90,
+    // More magic: note the last value is a blank string.
+    text: ['8-9', '7-8', '6-7', '5-6', '4-5', '3-4', '2-3', '1-2', '0-1', ''],
+    textinfo: 'text',
+    textposition:'inside',	  
+    // Still more magic: note the last value is white.
+    marker: {
+      colors:['rgba(14, 127, 0, .5)', 'rgba(110, 154, 22, .5)',
+        'rgba(170, 202, 72, .5)', 'rgba(202, 209, 95, .5)',
+        'rgba(210, 216, 145, .5)', 'rgba(232, 226, 202, .5)',
+        'rgba(242, 236, 212, .5)', 'rgba(244, 246, 222, .5)',
+        'rgba(248, 248, 232, .5)', 'rgba(255, 255, 255, .5)']},
+    // Tired of magic? Last value is blank.
+    labels: ['8-9', '7-8', '6-7', '5-6', '4-5', '3-4', '2-3', '1-2', '0-1', ''],
+    hoverinfo: 'label',
+    hole: .5,
+    type: 'pie',
+    showlegend: false
   }];
-  var layout = { width: 400, height: 400, margin: { t: 0, b: 80 } };
+
+  var layout = {
+    shapes:[{
+      type: 'path',
+      path: path,
+      fillcolor: '850000',
+      line: {
+        color: '850000'
+      }
+    }],
+    margin: { t: 25, b: 25, l: 25, r: 25 },
+    title: 'Scrubs Per Week',
+    height: 500,
+    width: 500,
+    xaxis: {type:'category',zeroline:false, showticklabels:false,
+    showgrid: false, range: [-1, 1]},
+    yaxis: {type:'category',zeroline:false, showticklabels:false,
+    showgrid: false, range: [-1, 1]}
+  };
+
   Plotly.newPlot("gauge", data, layout);
 }
 
+// This function gets a random color for the bubble graph.
 function getRandomColor() {
   var letters = '0123456789ABCDEF';
   var color = '#';
@@ -88,6 +148,7 @@ function getRandomColor() {
   return color;
 }
 
+// This function creates the bubble graph.
 function bubble(sample) {
   otu_ids = sample.otu_ids.slice(0, 10);
   sample_values = sample.sample_values.slice(0, 10);
@@ -98,7 +159,6 @@ function bubble(sample) {
   for (var i = 0; i < sample.otu_ids.length; i++) {
     colors.push(getRandomColor());
   }
- console.log("colors: ", colors);
 
   var trace1 = {
     x: sample.otu_ids,
@@ -119,19 +179,32 @@ function bubble(sample) {
   var layout = {
     showlegend: false,
     height: 600,
-    width: 1200
+    width: 1200,
+    margin: { t: 0, b: 25, l: 25, r: 25 }
   };
 
   Plotly.newPlot("bubble", data, layout);
 }
 
-// Fetch the JSON data and console log it
+// Fetch the JSON data 
 d3.json(url).then(function(data) {
- 
-  //console.log("metadata.id: ", data.metadata[0].id);
-  //console.log("metadata.ethnicity: ", data.metadata[0].ethnicity);
+  // Get the default ID selection.
+  var defaultID = data.names[0];
+  // Run the chart functions with the default value.
+  data.metadata.forEach(function (entry) {
+    if (entry.id == defaultID) {
+      printMetadata(entry);
+      gauge(entry);
+    }
+  });
+  data.samples.forEach(function (entry) {
+    defaultID = data.names[0];
+    if (entry.id == defaultID) {
+      barChart(entry);
+      bubble(entry);
+    }
+  });
 
-  // Get ID selection.
   // Prime option list with blank entry.
   options = [""];
   // Set option list to json names array.
@@ -143,14 +216,12 @@ d3.json(url).then(function(data) {
   selectID.on("change", function() {
     id = d3.event.target.value;
     data.metadata.forEach(function (entry) {
-      //console.log(entry.id);
       if (entry.id == id) {
         printMetadata(entry);
         gauge(entry);
       }
     });
     data.samples.forEach(function (entry) {
-      //console.log(entry.id);
       if (entry.id == id) {
         barChart(entry);
         bubble(entry);
