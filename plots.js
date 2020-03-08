@@ -33,7 +33,7 @@ function barChart(sample) {
   sample_values = sample.sample_values.slice(0, 10);
   otu_labels = sample.otu_labels.slice(0, 10);
   var trace1 = {
-    x: sample_values.reverse(),
+    x: sample_values,
     text: otu_labels,
     type: "bar",
     orientation: "h"
