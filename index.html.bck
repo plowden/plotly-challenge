@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Belly Button Biodiversity</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="jumbotron text-center" id="home">
+      <h1 class="display-4">Belly Button Biodiversity Dashboard</h1>
+      <hr class="my-4">
+      <p class="lead">Use the interactive charts below to explore the dataset.</p>
+      <a href="http://robdunnlab.com/projects/belly-button-biodiversity/">Learn more</a>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="row justify-content-center">
+          <h5 class="text-center">Select Sample</h5>
+          <!-- <img src="Images/dropdown.png" alt="dropdown" id="dropdown-image"> -->
+        </div>
+        <div class="row justify-content-center">
+          <div id="select"></div>
+          <select id="select-id">
+            <!--<option value="999">999</option>-->
+            <!--<option value="111">111</option>-->
+          </select>
+        </div>
+        <div class="row">
+          &nbsp;
+        </div>
+        <div class="row justify-content-center">
+          <h5 class="text-center">Sample MetaData</h5>
+          <!--<img src="Images/hw01.png" alt="hw03" id="metadata-image">-->
+        </div>
+        <div class="row justify-content-center" id="metadata-age">
+        </div>
+        <div class="row justify-content-center" id="metadata-bbtype">
+        </div>
+        <div class="row justify-content-center" id="metadata-ethnicity">
+        </div>
+        <div class="row justify-content-center" id="metadata-gender">
+        </div>
+        <div class="row justify-content-center" id="metadata-location">
+        </div>
+        <div class="row justify-content-center" id="metadata-wfreq">
+        </div>
+        <div class="row justify-content-center" id="metadata-id">
+        </div>
+      </div>
+      <div class="col-md-5">
+        <h5 class="text-center">Sample Frequency</h5>
+        <div class="text-center" id="bar_chart"></div>
+      </div>
+      <div class="col-md-4">
+        <h5 class="text-center">Belly Button Washing Frequency</h5>
+        <div class="row justify-content-center">
+          <div id="gauge"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-12">
+        <h5 class="text-center">OTU ID Distribution</h5>
+        <div id="bubble"></div>
+      </div>
+    </div>
+  </div>
+  <script src="plots.js"></script>
+</body>
+</html>
