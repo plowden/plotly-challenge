@@ -61,70 +61,13 @@ p {
   background: white;
 }
 
-.section {
-  color: #333;
-}
-
-.box-grid-image {
+.box {
   border: solid 2px green;
+  background-color: lightgray;
 }
 
 /* Selecting elements by ID */
 #home {
 /*  background-image: url('Images/bacteria.jpg'); */
-}
-
-#main-summary,
-#summary-image {
-  float: left;
-}
-
-#figure {
-  position: relative;
-}
-
-#main-summary {
-  width: 70%;
-}
-
-#metadata-image {
-  width: 300px;
-  height: 300px;
-  margin-right: 20px;
-  margin-bottom: 20px;
-  float: left;
-}
-
-#dropdown-image {
-  width: 200px;
-  height: 150px;
-  margin-right: 20px;
-  margin-bottom: 20px;
-  float: left;
-}
-
-#bar_chart-image {
-  width: 450px;
-  height: 360px;
-  margin-left: 20px;
-  margin-right: 20px;
-  margin-bottom: 20px;
-  float: left;
-}
-
-#gauge-image {
-  width: 400px;
-  height: 300px;
-  margin-left: 0px;
-  margin-right: 20px;
-  margin-bottom: 20px;
-  float: left;
-}
-
-#bubble_chart-image {
-  width: 1200px;
-  height: 400px;
-  margin-bottom: 20px;
-  float: left;
 }
 
