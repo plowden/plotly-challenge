@@ -160,6 +160,9 @@ function getRandomColor() {
 
 // This function creates the bubble graph.
 function bubble(sample) {
+  //otu_ids = sample.otu_ids.slice(0, 10);
+  //sample_values = sample.sample_values.slice(0, 10);
+  //otu_labels = sample.otu_labels.slice(0, 10);
   otu_ids = sample.otu_ids.slice(0, 10);
   sample_values = sample.sample_values.slice(0, 10);
   otu_labels = sample.otu_labels.slice(0, 10);
@@ -171,16 +174,16 @@ function bubble(sample) {
   }
 
   var trace1 = {
-    x: otu_ids,
-    y: sample_values,
-    text: otu_labels,
+    x: sample.otu_ids,
+    y: sample.sample_values,
+    text: sample.otu_labels,
     mode: 'markers',
     xaxis: (
       title='OTU ID'
     ),
     marker: {
       color: colors,
-      size: sample_values
+      size: sample.sample_values
     }
   };
 
