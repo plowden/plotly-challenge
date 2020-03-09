@@ -29,14 +29,24 @@ function printMetadata(meta) {
 // This function creates the horizontal bar chart showing
 // the top 10 OTU IDs.
 function barChart(sample) {
-  otu_ids = sample.otu_ids.slice(0, 10);
-  sample_values = sample.sample_values.slice(0, 10);
-  otu_labels = sample.otu_labels.slice(0, 10);
+  otu_ids = sample.otu_ids.slice(0, 10).reverse();
+  sample_values = sample.sample_values.slice(0, 10).reverse();
+  otu_labels = sample.otu_labels.slice(0, 10).reverse();
   var trace1 = {
     x: sample_values,
     text: otu_labels,
     type: "bar",
-    orientation: "h"
+    orientation: "h",
+    transforms: [{
+      type: 'sort',
+      target: 'x',
+      order: 'ascending'
+    }, {
+      type: 'filter',
+      target: 'x',
+      operation: '>',
+      value: 1
+    }]
   };
   var data = [trace1];
   var layout = {
